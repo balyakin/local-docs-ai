@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="202" height="40" viewBox="0 0 202 40" role="img" aria-label="Установка Ollama">
+  <rect x=".5" y=".5" width="201" height="39" rx="11" fill="#182824" stroke="#557267"/>
+  <circle cx="22" cy="20" r="5" fill="#D9F99D"/>
+  <text x="39" y="25" fill="#EBF1E8" font-family="Inter, system-ui, -apple-system, Segoe UI, Arial, sans-serif" font-size="15" font-weight="600">Установка Ollama</text>
+</svg>

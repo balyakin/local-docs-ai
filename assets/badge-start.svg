@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="198" height="40" viewBox="0 0 198 40" role="img" aria-label="Быстрый запуск">
+  <rect x=".5" y=".5" width="197" height="39" rx="11" fill="#D9F99D" stroke="#BCE17F"/>
+  <path d="M17 20h12m-5-5 5 5-5 5" fill="none" stroke="#17221D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="41" y="25" fill="#17221D" font-family="Inter, system-ui, -apple-system, Segoe UI, Arial, sans-serif" font-size="15" font-weight="700">Быстрый запуск</text>
+</svg>

@@ -1,0 +1,9 @@
+.venv/
+.idea/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+data/
+documents/*
+!documents/example.md
+.streamlit/secrets.toml

@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="205" viewBox="0 0 1200 205" role="img" aria-labelledby="title description">
+  <title id="title">local-docs-ai: материалы проекта</title>
+  <desc id="description">Иллюстрация документов с выделенной строкой и знаком поиска в цветах проекта.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#101B1A"/>
+      <stop offset="1" stop-color="#0A1111"/>
+    </linearGradient>
+    <radialGradient id="glow">
+      <stop stop-color="#B8E780" stop-opacity=".18"/>
+      <stop offset="1" stop-color="#B8E780" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="dots" width="28" height="28" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1" fill="#7D9890" opacity=".2"/>
+    </pattern>
+    <clipPath id="round">
+      <rect width="1200" height="205" rx="20"/>
+    </clipPath>
+  </defs>
+  <g clip-path="url(#round)">
+    <rect width="1200" height="205" fill="url(#background)"/>
+    <rect width="1200" height="205" fill="url(#dots)"/>
+    <circle cx="1030" cy="18" r="300" fill="url(#glow)"/>
+    <path d="M0 181H1200" stroke="#617B72" opacity=".25"/>
+    <rect x="51" y="46" width="36" height="36" rx="10" fill="#D9F99D"/>
+    <path d="M62 56h11l5 5v11H62zM73 56v5h5M66 66h8" fill="none" stroke="#17221D" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="105" y="75" fill="#F1F4ED" font-family="Inter, system-ui, -apple-system, Segoe UI, Arial, sans-serif" font-size="31" font-weight="700" letter-spacing="-1">local-docs-ai</text>
+    <text x="51" y="129" fill="#B4C7B8" font-family="Inter, system-ui, -apple-system, Segoe UI, Arial, sans-serif" font-size="19">Документы → фрагменты → ответ → источник</text>
+
+    <g transform="rotate(-10 955 104)">
+      <rect x="882" y="25" width="155" height="173" rx="12" fill="#AEC9B2"/>
+      <path d="M903 67h68M903 84h103M903 101h88M903 135h103" stroke="#708E78" stroke-width="6" stroke-linecap="round" opacity=".75"/>
+      <rect x="898" y="151" width="106" height="21" rx="6" fill="#D9F99D"/>
+    </g>
+    <g transform="rotate(7 1045 99)">
+      <rect x="965" y="14" width="158" height="178" rx="12" fill="#E2EBDD"/>
+      <path d="M988 56h72M988 73h106M988 90h93M988 124h104" stroke="#9DB3A3" stroke-width="6" stroke-linecap="round"/>
+      <rect x="984" y="141" width="111" height="21" rx="6" fill="#D9F99D"/>
+      <path d="M992 152h82" stroke="#6F945B" stroke-width="5" stroke-linecap="round"/>
+    </g>
+    <circle cx="862" cy="113" r="35" fill="#182824" stroke="#D9F99D" stroke-width="2"/>
+    <circle cx="857" cy="108" r="12" fill="none" stroke="#D9F99D" stroke-width="3"/>
+    <path d="m866 117 10 10" stroke="#D9F99D" stroke-width="3" stroke-linecap="round"/>
+  </g>
+</svg>

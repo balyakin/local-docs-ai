@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="470" viewBox="0 0 1280 470" role="img" aria-labelledby="title description">
+  <title id="title">local-docs-ai</title>
+  <desc id="description">Локальный ИИ для вопросов к своим документам. Справа — листы с выделенным фрагментом и пример ответа с источником.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#101B1A"/>
+      <stop offset="1" stop-color="#0A1111"/>
+    </linearGradient>
+    <radialGradient id="glow">
+      <stop stop-color="#B8E780" stop-opacity=".18"/>
+      <stop offset="1" stop-color="#B8E780" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="dots" width="28" height="28" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1" fill="#7D9890" opacity=".2"/>
+    </pattern>
+    <clipPath id="round">
+      <rect width="1280" height="470" rx="24"/>
+    </clipPath>
+  </defs>
+  <g clip-path="url(#round)">
+    <rect width="1280" height="470" fill="url(#background)"/>
+    <rect width="1280" height="470" fill="url(#dots)"/>
+    <circle cx="1080" cy="78" r="355" fill="url(#glow)"/>
+    <path d="M0 94H1280M0 435H1280" stroke="#617B72" opacity=".25"/>
+
+    <g transform="translate(70 31)">
+      <rect width="37" height="37" rx="10" fill="#D9F99D"/>
+      <path d="M11 10h11l5 5v12H11z" fill="none" stroke="#17221D" stroke-width="1.7" stroke-linejoin="round"/>
+      <path d="M22 10v5h5M15 20h8M15 24h5" fill="none" stroke="#17221D" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+    <text x="122" y="57" fill="#DCE9DF" font-family="Inter, system-ui, -apple-system, Segoe UI, Arial, sans-serif" font-size="14" font-weight="700" letter-spacing="2">BALYAKIN / LOCAL TOOLS</text>
+    <text x="1204" y="57" text-anchor="end" fill="#8EA49A" font-family="Inter, system-ui, -apple-system, Segoe UI, Arial, sans-serif" font-size="14" letter-spacing="1.3">01 / 07</text>
+
+    <text x="70" y="190" fill="#F1F4ED" font-family="Inter, system-ui, -apple-system, Segoe UI, Arial, sans-serif" font-size="69" font-weight="750" letter-spacing="-3">local-docs-ai</text>
+    <path d="M72 215H160" stroke="#D9F99D" stroke-width="4" stroke-linecap="round"/>
+    <text x="70" y="274" fill="#E7EFE5" font-family="Inter, system-ui, -apple-system, Segoe UI, Arial, sans-serif" font-size="29" font-weight="600">Спросите свои документы.</text>
+    <text x="70" y="317" fill="#A7B9AC" font-family="Inter, system-ui, -apple-system, Segoe UI, Arial, sans-serif" font-size="18">Локальный ответ с проверяемым источником.</text>
+    <text x="70" y="403" fill="#D9F99D" font-family="Inter, system-ui, -apple-system, Segoe UI, Arial, sans-serif" font-size="16" font-weight="600">Один готовый проект. Семь коротких занятий.</text>
+
+    <g transform="rotate(-9 849 267)">
+      <rect x="760" y="125" width="178" height="270" rx="14" fill="#AEC9B2"/>
+      <path d="M787 175h81M787 194h123M787 213h105M787 251h123M787 270h95" stroke="#708E78" stroke-width="7" stroke-linecap="round" opacity=".7"/>
+      <rect x="781" y="288" width="132" height="25" rx="7" fill="#D9F99D"/>
+      <path d="M789 301h102" stroke="#466648" stroke-width="5" stroke-linecap="round"/>
+    </g>
+    <g transform="rotate(4 863 261)">
+      <rect x="783" y="113" width="178" height="270" rx="14" fill="#E2EBDD"/>
+      <path d="M810 164h74M810 183h124M810 202h109M810 240h124M810 259h94" stroke="#9DB3A3" stroke-width="7" stroke-linecap="round"/>
+      <rect x="806" y="279" width="132" height="25" rx="7" fill="#D9F99D"/>
+      <path d="M814 292h102" stroke="#6F945B" stroke-width="5" stroke-linecap="round"/>
+    </g>
+    <rect x="869" y="124" width="338" height="280" rx="19" fill="#111E1B" stroke="#36534A"/>
+    <rect x="885" y="141" width="326" height="280" rx="19" fill="#182824" stroke="#527166"/>
+    <circle cx="915" cy="172" r="5" fill="#D9F99D"/>
+    <text x="932" y="177" fill="#BBD0BF" font-family="Inter, system-ui, -apple-system, Segoe UI, Arial, sans-serif" font-size="12" font-weight="700" letter-spacing="1.8">ВОПРОС К ДОКУМЕНТУ</text>
+    <text x="915" y="220" fill="#F1F4ED" font-family="Inter, system-ui, -apple-system, Segoe UI, Arial, sans-serif" font-size="21" font-weight="600">Цена диагностики?</text>
+    <path d="M915 245H1182" stroke="#547064" opacity=".7"/>
+    <text x="915" y="278" fill="#BBD0BF" font-family="Inter, system-ui, -apple-system, Segoe UI, Arial, sans-serif" font-size="12" font-weight="700" letter-spacing="1.8">ОТВЕТ</text>
+    <text x="915" y="322" fill="#D9F99D" font-family="Inter, system-ui, -apple-system, Segoe UI, Arial, sans-serif" font-size="36" font-weight="700">500 ₽</text>
+    <text x="915" y="350" fill="#CDDCD0" font-family="Inter, system-ui, -apple-system, Segoe UI, Arial, sans-serif" font-size="15">При ремонте сумму зачтут.</text>
+    <rect x="915" y="368" width="240" height="31" rx="8" fill="#2B4036"/>
+    <text x="928" y="389" fill="#DCE9DF" font-family="Inter, system-ui, -apple-system, Segoe UI, Arial, sans-serif" font-size="13">example.md · строка 11</text>
+  </g>
+</svg>
