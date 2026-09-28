@@ -22,10 +22,21 @@ CHAT_MODEL = "qwen3:1.7b"
 
 
 class AppError(Exception):
-    """Ошибка, которую можно показать человеку без технического стека."""
+    """Ошибка приложения с сообщением, понятным пользователю"""
 
 
 def scan_documents(root: Path) -> tuple[list[tuple[str, str]], str]:
+    """Читает документы и вычисляет отпечаток их содержимого
+
+    Args:
+        root: Каталог с документами
+
+    Returns:
+        Пары относительного пути и текста вместе с отпечатком SHA-256
+
+    Raises:
+        AppError: Каталог отсутствует, превышен лимит или файл нельзя прочитать
+    """
     if not root.is_dir():
         raise AppError(f"Папка {root} не найдена.")
 
@@ -61,6 +72,19 @@ def scan_documents(root: Path) -> tuple[list[tuple[str, str]], str]:
 
 
 def split_document(path: str, text: str, max_chars: int = CHUNK_CHARS) -> list[dict]:
+    """Разбивает документ на фрагменты с номерами исходных строк
+
+    Args:
+        path: Относительный путь к документу
+        text: Текст документа
+        max_chars: Максимальная длина фрагмента в символах
+
+    Returns:
+        Фрагменты с текстом, путём и диапазонами строк
+
+    Raises:
+        ValueError: Максимальная длина меньше единицы
+    """
     if max_chars < 1:
         raise ValueError("max_chars must be positive")
     chunks: list[dict] = []
@@ -93,6 +117,19 @@ def split_document(path: str, text: str, max_chars: int = CHUNK_CHARS) -> list[d
 
 
 def ollama_json(path: str, payload: dict | None = None, base_url: str = OLLAMA_URL) -> dict:
+    """Отправляет запрос к локальной Ollama и читает ответ JSON
+
+    Args:
+        path: Путь метода API Ollama
+        payload: Тело POST-запроса или None для GET-запроса
+        base_url: Адрес сервера Ollama
+
+    Returns:
+        Ответ сервера в виде словаря
+
+    Raises:
+        AppError: Сервер недоступен или вернул ошибочный ответ
+    """
     data = json.dumps(payload).encode("utf-8") if payload is not None else None
     request = Request(
         base_url.rstrip("/") + path,
@@ -118,6 +155,17 @@ def ollama_json(path: str, payload: dict | None = None, base_url: str = OLLAMA_U
 
 
 def check_ollama(base_url: str = OLLAMA_URL) -> None:
+    """Проверяет доступность Ollama и наличие обеих моделей
+
+    Args:
+        base_url: Адрес сервера Ollama
+
+    Returns:
+        None, если сервер отвечает и модели установлены
+
+    Raises:
+        AppError: Сервер недоступен или отсутствует нужная модель
+    """
     result = ollama_json("/api/tags", base_url=base_url)
     try:
         names = {item["name"] for item in result["models"]}
@@ -130,6 +178,18 @@ def check_ollama(base_url: str = OLLAMA_URL) -> None:
 
 
 def embed_texts(texts: list[str], base_url: str = OLLAMA_URL) -> list[list[float]]:
+    """Получает векторы текстов от модели Ollama
+
+    Args:
+        texts: Тексты для преобразования в векторы
+        base_url: Адрес сервера Ollama
+
+    Returns:
+        Векторы в том же порядке, что и исходные тексты
+
+    Raises:
+        AppError: Сервер недоступен или вернул некорректные векторы
+    """
     if not texts:
         return []
     result = ollama_json(
@@ -150,6 +210,19 @@ def embed_texts(texts: list[str], base_url: str = OLLAMA_URL) -> list[list[float
 
 
 def build_index(documents: Path, index_file: Path, base_url: str = OLLAMA_URL) -> dict:
+    """Создаёт и сохраняет поисковый индекс документов
+
+    Args:
+        documents: Каталог с исходными документами
+        index_file: Путь для сохранения индекса
+        base_url: Адрес сервера Ollama
+
+    Returns:
+        Индекс с фрагментами, векторами и отпечатком документов
+
+    Raises:
+        AppError: Документы непригодны, сервер недоступен или индекс нельзя сохранить
+    """
     files, fingerprint = scan_documents(documents)
     if not files:
         raise AppError("В папке нет .md или .txt файлов. Добавьте документы и повторите.")
@@ -176,6 +249,18 @@ def build_index(documents: Path, index_file: Path, base_url: str = OLLAMA_URL) -
 
 
 def load_index(documents: Path, index_file: Path) -> dict:
+    """Загружает индекс и проверяет, что документы не изменились
+
+    Args:
+        documents: Каталог с исходными документами
+        index_file: Путь к сохранённому индексу
+
+    Returns:
+        Проверенный поисковый индекс
+
+    Raises:
+        AppError: Индекс отсутствует, недоступен, повреждён или устарел; документы недоступны или недопустимы
+    """
     try:
         index = json.loads(index_file.read_text(encoding="utf-8"))
     except FileNotFoundError as exc:
@@ -210,6 +295,20 @@ def load_index(documents: Path, index_file: Path) -> dict:
 
 def find_chunks(question: str, index: dict, limit: int = 3,
                 base_url: str = OLLAMA_URL) -> list[dict]:
+    """Находит фрагменты, наиболее близкие к вопросу по смыслу
+
+    Args:
+        question: Вопрос пользователя
+        index: Поисковый индекс документов
+        limit: Максимальное число найденных фрагментов
+        base_url: Адрес сервера Ollama
+
+    Returns:
+        Найденные фрагменты в порядке убывания близости
+
+    Raises:
+        AppError: Вопрос пуст или Ollama не смогла построить вектор
+    """
     if not question.strip():
         raise AppError("Напишите вопрос.")
     query = embed_texts([question.strip()], base_url)[0]
@@ -225,6 +324,20 @@ def find_chunks(question: str, index: dict, limit: int = 3,
 
 def answer_question(question: str, documents: Path, index_file: Path,
                     base_url: str = OLLAMA_URL) -> tuple[str, list[dict]]:
+    """Отвечает на вопрос по документам и возвращает источники ответа
+
+    Args:
+        question: Вопрос пользователя
+        documents: Каталог с исходными документами
+        index_file: Путь к сохранённому индексу
+        base_url: Адрес сервера Ollama
+
+    Returns:
+        Текст ответа и использованные фрагменты документов
+
+    Raises:
+        AppError: Вопрос пуст, индекс непригоден или Ollama не вернула ответ
+    """
     if not question.strip():
         raise AppError("Напишите вопрос.")
     index = load_index(documents, index_file)
@@ -259,6 +372,17 @@ def answer_question(question: str, documents: Path, index_file: Path,
 
 
 def main(argv: list[str] | None = None) -> int:
+    """Выполняет команду интерфейса командной строки
+
+    Args:
+        argv: Аргументы команды или None для аргументов процесса
+
+    Returns:
+        Код завершения: ноль при успехе, единица при ошибке приложения
+
+    Raises:
+        SystemExit: Команда или её аргументы не распознаны
+    """
     parser = argparse.ArgumentParser(description="Вопросы к своим документам через локальную Ollama")
     commands = parser.add_subparsers(dest="command", required=True)
     commands.add_parser("doctor", help="проверить Ollama и модели")
